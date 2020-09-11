@@ -49,7 +49,7 @@ const Error = styled.div`
     margin-bottom:2rem;
 `;
 
-const Form = ({setResumen}) => {
+const Form = ({setResumen, setCargando}) => {
 
     const [data, setData] = useState({
         brand: '',
@@ -96,12 +96,17 @@ const Form = ({setResumen}) => {
         const incrementoPlan = obtenerPlan(plan);
         resultado = parseFloat(incrementoPlan * resultado).toFixed(2);
 
-        // Total
+        // Cargando Spinner
+        setCargando(true);
+        setTimeout(() => {
+            // elimina Spinner
+            setCargando(false);
+            // pasa la data al componente principal
             setResumen({
                 cotizacion:resultado,
                 data
-            })
-
+            });
+        }, 3000)
     }
 
 

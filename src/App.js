@@ -4,6 +4,7 @@ import Form from './Components/Form';
 import styled from '@emotion/styled';
 import Resume from './Components/Resume';
 import Result from './Components/Result';
+import Spinner from './Components/Spinner';
 
 const Contenedor = styled.div `
   max-width:600px;
@@ -24,6 +25,8 @@ function App() {
       plan:''
   }}); 
 
+  const [cargando, setCargando] = useState(false);
+
 // Extraer data
   const {data, cotizacion} = resumen;
 
@@ -35,13 +38,16 @@ function App() {
    <ContenedorFormulario>
     <Form 
     setResumen={setResumen}
+    setCargando={setCargando}
     />
+    {cargando ? <Spinner /> : null}
     <Resume 
     data={data}
     />
-    <Result 
-    cotizacion={cotizacion}
-    />
+    { !cargando 
+      ? <Result cotizacion={cotizacion} />
+      : null
+    }
    </ContenedorFormulario>
    </Contenedor>
   );
