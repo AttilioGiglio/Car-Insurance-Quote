@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 
 const Campo = styled.div `
@@ -40,11 +40,30 @@ const Boton = styled.button `
 `;
 
 const Form = () => {
+
+    const [data, setData] = useState({
+        brand:'',
+        year:'',
+        plan:''
+    })
+
+    //extraer valores del state 
+    const {brand, year, plan} = data;
+
+    //leer los datos del formulario y colocarlos en el state
+    const obtenerInformacion = e => {
+        setData({...data, [e.target.name]:e.target.value})
+    }
+
     return (
         <form>
             <Campo>
                 <Label>Marca</Label>
-                <Select>
+                <Select
+                name='brand'
+                value={brand}
+                onChange={obtenerInformacion}
+                >
                     <option value=''>-- Seleccione --</option>
                     <option value='americano'>Americano</option>
                     <option value='europeo'>Europeo</option>
@@ -53,7 +72,11 @@ const Form = () => {
             </Campo>
             <Campo>
                 <Label>Año</Label>
-                <Select>
+                <Select
+                  name='year'
+                  value={year}
+                  onChange={obtenerInformacion}
+                >
                     <option value="">-- Seleccione --</option>
                     <option value="2021">2021</option>
                     <option value="2020">2020</option>
@@ -72,11 +95,15 @@ const Form = () => {
             type='radio'
             name='plan'
             value='basico'
+            checked={plan==='basico'}
+            onChange={obtenerInformacion}
             /> basico
             <Input 
             type='radio'
             name='plan'
             value='completo'
+            checked={plan==='completo'}
+            onChange={obtenerInformacion}
             />
             <Boton type='button'>Cotizar</Boton>
         </form>
