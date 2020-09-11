@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { obtenerDiferenciaYear } from './Helper';
-import { calcularMarca } from './Helper';
+import { obtenerDiferenciaYear, calcularMarca, obtenerPlan } from './Helper';
 
 const Campo = styled.div`
     display:flex;
@@ -97,6 +96,8 @@ const Form = () => {
     
     // Basico aumenta 20%
     // Completo 50%
+        const incrementoPlan = obtenerPlan(plan);
+        resultado = parseFloat(incrementoPlan*resultado).toFixed(2);
 
     // Total
 
