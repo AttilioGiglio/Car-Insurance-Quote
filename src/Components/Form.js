@@ -1,4 +1,9 @@
-import React from 'react'
+import React from 'react';
+import styled from '@emotion/styled';
+
+const Campo = styled.div `
+    display
+`;
 
 const Form = () => {
     return (
