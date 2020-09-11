@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { obtenerDiferenciaYear, calcularMarca, obtenerPlan } from './Helper';
+import PropTypes from 'prop-types';
 
 const Campo = styled.div`
     display:flex;
@@ -89,7 +90,6 @@ const Form = ({setResumen, setCargando}) => {
         // asiatico 5%
         // europeo 30%
         resultado = calcularMarca(brand) * resultado;
-        console.log(resultado);
 
         // Basico aumenta 20%
         // Completo 50%
@@ -103,7 +103,7 @@ const Form = ({setResumen, setCargando}) => {
             setCargando(false);
             // pasa la data al componente principal
             setResumen({
-                cotizacion:resultado,
+                cotizacion: Number(resultado),
                 data
             });
         }, 3000)
@@ -167,6 +167,11 @@ const Form = ({setResumen, setCargando}) => {
             <Boton type='submit'>Cotizar</Boton>
         </form>
     )
+}
+
+Form.propTypes = {
+    setResumen: PropTypes.func.isRequired,
+    setCargando: PropTypes.func.isRequired
 }
 
 export default Form
