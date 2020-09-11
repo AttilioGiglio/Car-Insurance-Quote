@@ -98,7 +98,7 @@ const Form = ({setResumen}) => {
 
         // Total
             setResumen({
-                contizacion:resultado,
+                cotizacion:resultado,
                 data
             })
 

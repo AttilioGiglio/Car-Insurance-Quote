@@ -3,6 +3,7 @@ import Header from './Components/Header';
 import Form from './Components/Form';
 import styled from '@emotion/styled';
 import Resume from './Components/Resume';
+import Result from './Components/Result';
 
 const Contenedor = styled.div `
   max-width:600px;
@@ -24,7 +25,7 @@ function App() {
   }}); 
 
 // Extraer data
-  const {data} = resumen;
+  const {data, cotizacion} = resumen;
 
   return (
     <Contenedor>
@@ -37,6 +38,9 @@ function App() {
     />
     <Resume 
     data={data}
+    />
+    <Result 
+    cotizacion={cotizacion}
     />
    </ContenedorFormulario>
    </Contenedor>
