@@ -18,7 +18,25 @@ const Select = styled.select `
     -webkit-appearance: none;
 `
 const Input = styled.input `
-    margin: 0 1rem;
+    margin: 1rem 1rem;
+`;
+
+const Boton = styled.button `
+    background-color:#00838F;
+    font-size:16px;
+    width: 100%;
+    padding:1rem;
+    color:#ffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    border:none;
+    transition: background-color 3s ease;
+    margin-top:1.5rem;
+
+    &:hover {
+        background-color: #26C6DA;
+        cursor:pointer;
+    }
 `;
 
 const Form = () => {
@@ -60,7 +78,7 @@ const Form = () => {
             name='plan'
             value='completo'
             />
-            <button type='button'>Cotizar</button>
+            <Boton type='button'>Cotizar</Boton>
         </form>
     )
 }
