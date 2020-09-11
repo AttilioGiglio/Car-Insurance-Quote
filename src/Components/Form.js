@@ -81,23 +81,24 @@ const Form = () => {
 
         // obtener la diferencia de años
         const diferencia = obtenerDiferenciaYear(year);
-        
+
         // por cada año hay que restar el 3%
         resultado -= (diferencia * 3) * resultado / 100;
-        
+
         // americano 15%
         // asiatico 5%
         // europeo 30%
         resultado = calcularMarca(brand) * resultado;
         console.log(resultado);
 
+        // Basico aumenta 20%
+        // Completo 50%
+        const incrementoPlan = obtenerPlan(plan);
+        resultado = parseFloat(incrementoPlan * resultado).toFixed(2);
+
     }
 
-    
-    // Basico aumenta 20%
-    // Completo 50%
-        const incrementoPlan = obtenerPlan(plan);
-        resultado = parseFloat(incrementoPlan*resultado).toFixed(2);
+
 
     // Total
 
