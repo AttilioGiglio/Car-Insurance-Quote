@@ -1,27 +1,28 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import { obtenerDiferenciaYear } from './Helper';
 
-const Campo = styled.div `
+const Campo = styled.div`
     display:flex;
     margin-bottom:1rem;
     align-items:center;
 `;
 
-const Label = styled.label `
+const Label = styled.label`
     flex: 0 0 100px;
 `
-const Select = styled.select `
+const Select = styled.select`
     display:block;
     width:100%;
     padding:1rem;
     border: 1px solid #e1e1e1;
     -webkit-appearance: none;
 `
-const Input = styled.input `
+const Input = styled.input`
     margin: 1rem 1rem;
 `;
 
-const Boton = styled.button `
+const Boton = styled.button`
     background-color:#00838F;
     font-size:16px;
     width: 100%;
@@ -39,7 +40,7 @@ const Boton = styled.button `
     }
 `;
 
-const Error = styled.div `
+const Error = styled.div`
     background-color: red;
     color: white;
     padding: 1rem;
@@ -51,32 +52,36 @@ const Error = styled.div `
 const Form = () => {
 
     const [data, setData] = useState({
-        brand:'',
-        year:'',
-        plan:''
+        brand: '',
+        year: '',
+        plan: ''
     })
 
     const [error, setError] = useState(false);
 
     //extraer valores del state 
-    const {brand, year, plan} = data;
+    const { brand, year, plan } = data;
 
     //leer los datos del formulario y colocarlos en el state
     const obtenerInformacion = e => {
-        setData({...data, [e.target.name]:e.target.value})
+        setData({ ...data, [e.target.name]: e.target.value })
     }
 
     // Cuando el usuario presiona submit
     const cotizarSeguro = (e) => {
         e.preventDefault();
-        if(brand.trim()===''||year.trim()===''||plan.trim()===''){
+        if (brand.trim() === '' || year.trim() === '' || plan.trim() === '') {
             setError(true);
             return;
         }
         setError(false);
+
+        // obtener la diferencia de años
+        const diferencia = obtenerDiferenciaYear(year);
+        console.log(diferencia);
     }
 
-    // obtener la diferencia de años
+
 
     // por cada año hay que restar el 3%
 
@@ -97,9 +102,9 @@ const Form = () => {
             <Campo>
                 <Label>Marca</Label>
                 <Select
-                name='brand'
-                value={brand}
-                onChange={obtenerInformacion}
+                    name='brand'
+                    value={brand}
+                    onChange={obtenerInformacion}
                 >
                     <option value=''>-- Seleccione --</option>
                     <option value='americano'>Americano</option>
@@ -110,9 +115,9 @@ const Form = () => {
             <Campo>
                 <Label>Año</Label>
                 <Select
-                  name='year'
-                  value={year}
-                  onChange={obtenerInformacion}
+                    name='year'
+                    value={year}
+                    onChange={obtenerInformacion}
                 >
                     <option value="">-- Seleccione --</option>
                     <option value="2021">2021</option>
@@ -127,21 +132,21 @@ const Form = () => {
                     <option value="2012">2012</option>
                 </Select>
             </Campo>
-            <Label>Plan</Label>
+            <Label>Tipos de planes:</Label>
             <Input
-            type='radio'
-            name='plan'
-            value='basico'
-            checked={plan==='basico'}
-            onChange={obtenerInformacion}
-            /> basico
-            <Input 
-            type='radio'
-            name='plan'
-            value='completo'
-            checked={plan==='completo'}
-            onChange={obtenerInformacion}
-            />
+                type='radio'
+                name='plan'
+                value='basico'
+                checked={plan === 'basico'}
+                onChange={obtenerInformacion}
+            /> Basico
+            <Input
+                type='radio'
+                name='plan'
+                value='completo'
+                checked={plan === 'completo'}
+                onChange={obtenerInformacion}
+            /> Completo
             <Boton type='submit'>Cotizar</Boton>
         </form>
     )
